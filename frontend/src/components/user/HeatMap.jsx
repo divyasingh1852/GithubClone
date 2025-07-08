@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import HeatMap from "@uiw/react-heat-map";
-import "./Profile.css";
+import "./profile.css";
 
 const generateFullYearData = () => {
   const data = [];
