@@ -46,7 +46,7 @@ async function signup (req, res)  {
         const result = await usersCollection.insertOne(newUser);    //in mongodb package .insertOne but in mongoose .save()
 
         const token = jwt.sign({id:result.insertId}, process.env.JWT_SECRET_KEY, {expiresIn:"1h"});
-        res.json({token, userId:result.insertId});
+        res.json({token, userId:result.insertedId, username});
     } catch(err) {
         console.log("Error during signup : ", err.message);
         res.status(500).send("Server error!");
@@ -73,7 +73,7 @@ async function login (req, res) {
         }
 
        const token = jwt.sign({id:user._id}, process.env.JWT_SECRET_KEY, {expiresIn:"1h"});
-       res.json({token, userId:user._id});
+       res.json({token, userId:user._id, username: user.username});
     } catch(err){
        console.log("Error during login : ", err.message);
        res.status(500).send("Server error!");
