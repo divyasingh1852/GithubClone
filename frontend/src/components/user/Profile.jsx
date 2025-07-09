@@ -21,7 +21,7 @@ const Profile = () => {
       if (userId) {
         try {
           const response = await axios.get(
-            `http://13.204.47.216:3000/userProfile/${userId}`
+            `https://13.204.47.216:3000/userProfile/${userId}`
           );
           setUserDetails(response.data);           //here is axios -> no need to write response.json
         } catch (err) {

@@ -23,7 +23,7 @@ const Signup = () => {
       setLoading(true);
       console.log("Payload being sent:", { username, email, password });
 
-      const res = await axios.post("http://13.204.47.216:3000/signup", {
+      const res = await axios.post("https://13.204.47.216:3000/signup", {
         email,
         password,
         username,
