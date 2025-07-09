@@ -22,7 +22,7 @@ const Signup = () => {
     try {
       setLoading(true);
       console.log("Payload being sent:", { username, email, password });
-      const res = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/signup`, {
+      const res = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/signup`, {
         email,
         password,
         username,

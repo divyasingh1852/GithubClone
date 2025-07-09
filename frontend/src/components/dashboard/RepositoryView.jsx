@@ -12,7 +12,7 @@ const RepositoryView = () => {
 
   useEffect(() => {
     // 🔄 COMBINED FETCH: First get repo info...
-    fetch(`${process.env.REACT_APP_API_BASE_URL}/repo/${id}`)
+    fetch(`${import.meta.env.VITE_API_BASE_URL}/repo/${id}`)
       .then((res) => res.json())
       .then((data) => {
         const info = data[0];
@@ -21,7 +21,7 @@ const RepositoryView = () => {
         if (!info?.name) return; // ✅ ADDED: Safety check to prevent null access
 
         // 🔄 NESTED FETCH: Now get files for this repo
-         return fetch(`${process.env.REACT_APP_API_BASE_URL}/git/files?repoName=${info.name}`)
+        return fetch(`${import.meta.env.VITE_API_BASE_URL}/git/files?repoName=${info.name}`)
           .then((res) => res.json())
           .then(({ files }) => {
             if (files.length === 0) return;

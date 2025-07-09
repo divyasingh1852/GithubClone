@@ -9,7 +9,7 @@ const FilePreview = ({ fileUrl, fileName }) => {
   useEffect(() => {
     const fetchFile = async () => {
       try {
-         const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/proxy-file`,{
+         const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/proxy-file`, {
           params: { url: fileUrl },
         });
 

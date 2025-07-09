@@ -18,7 +18,7 @@ function Dashboard() {
 
     const fetchRepositories = async () => {
       try {
-        const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/repo/user/${userId}`);
+        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/repo/user/${userId}`);
         const data = await response.json();
         setRepositories(data.repositories);
       } catch (err) {
@@ -29,7 +29,7 @@ function Dashboard() {
     const fetchSuggestedRepositories = async () => {
       try {
         console.log("Base URL:", process.env.REACT_APP_API_BASE_URL);
-        const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/repo/all`);
+        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/repo/all`);
         const data = await response.json();
         setSuggestedRepositories(data);
       } catch (err) {

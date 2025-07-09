@@ -20,7 +20,7 @@ const Login = () => {
 
     try {
       setLoading(true);
-      const res = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/login`, {
+      const res = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/login`, {
         email,
         password,
       });

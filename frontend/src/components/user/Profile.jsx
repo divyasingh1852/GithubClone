@@ -21,7 +21,7 @@ const Profile = () => {
       if (userId) {
         try {
           const response = await axios.get(
-            `${process.env.REACT_APP_API_BASE_URL}/userProfile/${userId}`
+            `${import.meta.env.VITE_API_BASE_URL}/userProfile/${userId}`
           );
           setUserDetails(response.data);           //here is axios -> no need to write response.json
         } catch (err) {

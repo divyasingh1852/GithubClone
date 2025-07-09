@@ -51,7 +51,7 @@ const Create = () => {
     try {
       const token = localStorage.getItem("token");
 
-      const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/repo/create`,formData,{
+      const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/repo/create`, formData, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
