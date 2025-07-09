@@ -12,7 +12,7 @@ const RepositoryView = () => {
 
   useEffect(() => {
     // 🔄 COMBINED FETCH: First get repo info...
-    fetch(`http://13.204.47.216:3000/repo/${id}`)
+    fetch(`http://localhost:3000/repo/${id}`)
       .then((res) => res.json())
       .then((data) => {
         const info = data[0];
@@ -21,7 +21,7 @@ const RepositoryView = () => {
         if (!info?.name) return; // ✅ ADDED: Safety check to prevent null access
 
         // 🔄 NESTED FETCH: Now get files for this repo
-        return fetch(`http://13.204.47.216:3000/git/files?repoName=${info.name}`)
+        return fetch(`http://localhost:3000/git/files?repoName=${info.name}`)
           .then((res) => res.json())
           .then(({ files }) => {
             if (files.length === 0) return;

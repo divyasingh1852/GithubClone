@@ -353,7 +353,7 @@ app.get("/proxy-file", async (req, res) => {
    });
 
 
-   httpServer.listen(port, '0.0.0.0', () => {
+   httpServer.listen(port, () => {
       console.log(`Server is running on PORT ${port}`);
    });
 
