@@ -45,7 +45,7 @@ async function signup (req, res)  {
 
         const result = await usersCollection.insertOne(newUser);    //in mongodb package .insertOne but in mongoose .save()
 
-        const token = jwt.sign({id:result.insertId}, process.env.JWT_SECRET_KEY, {expiresIn:"1h"});
+        const token = jwt.sign({id:result.insertedId}, process.env.JWT_SECRET_KEY, {expiresIn:"1h"});
         res.json({token, userId:result.insertedId, username});
     } catch(err) {
         console.log("Error during signup : ", err.message);

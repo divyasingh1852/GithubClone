@@ -32,7 +32,7 @@ async function createRepository (req, res)  {
       });
     } catch(err) {
         console.log("Error during repository creation : ", err.message);
-        res.status(500).send("Server error!");
+        res.status(500).json("Server error!");
     }
 };
 
@@ -47,7 +47,7 @@ async function getAllRepositories (req, res)  {
         res.json(repositories);
     } catch(err) {
         console.error("Error during fetching repositories : ", err.message);
-        res.status(500).send("Server error!");
+        res.status(500).json("Server error!");
     }
 };
 
@@ -56,7 +56,7 @@ async function getAllRepositories (req, res)  {
 async function fetchRepositoryById  (req, res)  {
     const  { id } = req.params;
     try {
-        const repository = await Repository.find({ _id: id })
+        const repository = await Repository.findById(id)
         .populate("owner")        //populate - to fetch all owner details not only id.if populate not written there this will only give owner id
         .populate("issues")
 
@@ -67,7 +67,7 @@ async function fetchRepositoryById  (req, res)  {
         res.json(repository);
     } catch (err) {
         console.error("Error during fetching repository : ", err.message);
-        res.status(500).send("Server error!");
+        res.status(500).json("Server error!");
     }
 };
 
@@ -87,7 +87,7 @@ async function fetchRepositoryByName  (req, res)  {
         res.json(repository);
     } catch (err) {
         console.error("Error during fetching repository : ", err.message);
-        res.status(500).send("Server error!");
+        res.status(500).json("Server error!");
     }
 };
 
@@ -108,7 +108,7 @@ async function fetchRepositoriesForCurrentUser(req, res) {
     res.json({ message: "Repositories found!", repositories });
   } catch (err) {
     console.error("Error during fetching user repositories : ", err.message);
-    res.status(500).send("Server error");
+    res.status(500).json("Server error");
   }
 };
 
@@ -133,7 +133,7 @@ async function updateRepositoryById (req, res)  {
        });
     } catch (err) {
         console.error("Error during updating repositories : ", err.message);
-        res.status(500).send("Server error!");
+        res.status(500).json("Server error!");
     }
 }; 
 
@@ -158,7 +158,7 @@ async function toggleVisibilityById  (req, res)  {
        });
     } catch (err) {
         console.error("Error during toggling visibility : ", err.message);
-        res.status(500).send("Server error!");
+        res.status(500).json("Server error!");
     }
 };
 
@@ -175,7 +175,7 @@ async function deleteRepositoryById  (req, res)  {
            res.json({ message: "Repository deleted successfully!" });
         } catch(err) {
              console.error("Error during deleting repository : ", err.message);
-             res.status(500).send("Server error!");
+             res.status(500).json("Server error!");
         }
 };
 
