@@ -22,8 +22,7 @@ const Signup = () => {
     try {
       setLoading(true);
       console.log("Payload being sent:", { username, email, password });
-
-      const res = await axios.post("http://localhost:3000/signup", {
+      const res = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/signup`, {
         email,
         password,
         username,
