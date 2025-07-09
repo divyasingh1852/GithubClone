@@ -7,6 +7,10 @@ const FilePreview = ({ fileUrl, fileName }) => {
   const [error, setError] = useState("");
 
   useEffect(() => {
+     const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+     console.log("🌐 Base URL:", BASE_URL);            // ✅ LOG ENV VARIABLE
+     console.log("🔎 File URL:", fileUrl);              // ✅ LOG FILE INPUT
+
     const fetchFile = async () => {
       try {
          const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/proxy-file`, {
