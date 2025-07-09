@@ -9,7 +9,7 @@ const FilePreview = ({ fileUrl, fileName }) => {
   useEffect(() => {
     const fetchFile = async () => {
       try {
-        const response = await axios.get("https://13.204.47.216:3000/proxy-file", {
+        const response = await axios.get("http://13.204.47.216:3000/proxy-file", {
           params: { url: fileUrl },
         });
 
