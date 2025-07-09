@@ -28,6 +28,7 @@ function Dashboard() {
 
     const fetchSuggestedRepositories = async () => {
       try {
+        console.log("Base URL:", process.env.REACT_APP_API_BASE_URL);
         const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/repo/all`);
         const data = await response.json();
         setSuggestedRepositories(data);
