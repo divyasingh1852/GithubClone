@@ -11,17 +11,15 @@ const RepositoryView = () => {
   const [selectedFile, setSelectedFile] = useState(null);
 
   useEffect(() => {
-    // 🔄 COMBINED FETCH: First get repo info...
     fetch(`${import.meta.env.VITE_API_BASE_URL}/repo/${id}`)
       .then((res) => res.json())
       .then((info) => {
-        setRepoInfo(info); // ✅ SET repoInfo before fetching files
+        setRepoInfo(info); 
 
         console.log(" Repo Info Fetched:", info);
 
-        if (!info?.name) return; // ✅ ADDED: Safety check to prevent null access
+        if (!info?.name) return; 
 
-        // 🔄 NESTED FETCH: Now get files for this repo
         return fetch(`${import.meta.env.VITE_API_BASE_URL}/git/files?repoName=${info.name}`)
           .then((res) => res.json())
           .then(({ files }) => {
@@ -43,11 +41,11 @@ const RepositoryView = () => {
               return acc;
             }, {});
 
-            setFilesByCommit(fileMap); // ✅ SET file state after commit filtering
+            setFilesByCommit(fileMap); 
           });
       })
       .catch(console.error);
-  }, [id]); // ✅ SINGLE HOOK handles everything
+  }, [id]); 
 
   const handleFileClick = (file) => {
     if (selectedFile?.name === file.name) {

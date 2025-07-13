@@ -8,8 +8,8 @@ const FilePreview = ({ fileUrl, fileName }) => {
 
   useEffect(() => {
      const BASE_URL = import.meta.env.VITE_API_BASE_URL;
-     console.log("🌐 Base URL:", BASE_URL);            // ✅ LOG ENV VARIABLE
-     console.log("🔎 File URL:", fileUrl);              // ✅ LOG FILE INPUT
+     console.log(" Base URL:", BASE_URL);           
+     console.log(" File URL:", fileUrl);              
 
     const fetchFile = async () => {
       try {
@@ -17,7 +17,6 @@ const FilePreview = ({ fileUrl, fileName }) => {
           params: { url: fileUrl },
         });
 
-        // Convert object to readable string if needed
         if (typeof response.data === "object") {
           setContent(JSON.stringify(response.data, null, 2));
         } else {
@@ -25,7 +24,7 @@ const FilePreview = ({ fileUrl, fileName }) => {
         }
       } catch (err) {
         console.error("Error loading file:", err.message);
-        setError("⚠️ Error loading file.");
+        setError(" Error loading file.");
       }
     };
 

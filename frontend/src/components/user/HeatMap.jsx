@@ -21,8 +21,8 @@ const generateFullYearData = () => {
 const getPanelColors = (maxCount) => {
   const colors = {};
   for (let i = 1; i <= maxCount; i++) {
-    const green = Math.floor((i / maxCount) * 255); // green intensity
-    colors[i] = `rgb(0, ${green}, 0)`;              // same formula
+    const green = Math.floor((i / maxCount) * 255); 
+    colors[i] = `rgb(0, ${green}, 0)`;            
   }
   return colors;
 };

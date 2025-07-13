@@ -10,12 +10,10 @@ body {
   min-height: 100vh;
   color: whitesmoke;
   width: 100%;
-  /* flex-wrap: wrap; */
 }
 
 .user-profile-section {
   width: 250px;
-  /* min-height: 100vh; */
   display: flex;
   flex-direction: column;
   padding: 40px 10px;
@@ -28,9 +26,7 @@ body {
 }
 
 .user-name {
-  /* width: 250px; */
   margin: 10px 20px 10px 10px;
-  /* margin: 10px auto; */
 }
 
 .profile-image {

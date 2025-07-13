@@ -10,11 +10,11 @@ function Dashboard() {
   const [searchResults, setSearchResults] = useState([]);
 
 
-  const navigate = useNavigate(); // ✨ ADDED
+  const navigate = useNavigate(); 
 
 
   useEffect(() => {
-    console.log("🌐 BASE URL:", import.meta.env.VITE_API_BASE_URL); // ✅ ADD HERE
+    console.log(" BASE URL:", import.meta.env.VITE_API_BASE_URL); 
 
     const userId = localStorage.getItem("userId");
 
@@ -45,11 +45,10 @@ function Dashboard() {
 
   useEffect(() => {
     if (searchQuery === "") {
-      // setSearchResults(repositories);
       setSearchResults([]);
     } else {
       const filtered = repositories.filter((repo) =>
-        repo.name.toLowerCase().includes(searchQuery.toLowerCase())
+        repo.name.toLowerCase().startsWith(searchQuery.toLowerCase())
       );
       setSearchResults(filtered);
     }
@@ -60,18 +59,14 @@ function Dashboard() {
       <Navbar />
       <div className="github-homepage">
         <div className="columns">
-          {/* Left: Suggested Repos */}
           <aside className="left">
             <h3>Top Repositories</h3>
            {suggestedRepositories.map((repo)=>{
           return (
-            // <div key={repo._id}>
-
-
             <div
                 key={repo._id}
-                style={{ cursor: "pointer" }} // ✨ ADDED
-                onClick={() => navigate(`/repo/${repo._id}`)} // ✨ ADDED
+                style={{ cursor: "pointer" }} 
+                onClick={() => navigate(`/repo/${repo._id}`)} 
               >
 
 
@@ -82,7 +77,6 @@ function Dashboard() {
         })}
           </aside>
 
-          {/* Center: Your Repositories */}
           <main className="center">
             <h3>Home</h3>
             <input
@@ -95,13 +89,11 @@ function Dashboard() {
 
            {searchResults.map((repo)=>{
             return (
-            // <div key={repo._id}>
-
 
              <div
                 key={repo._id}
-                style={{ cursor: "pointer" }} // ✨ ADDED
-                onClick={() => navigate(`/repo/${repo._id}`)} // ✨ ADDED
+                style={{ cursor: "pointer" }}
+                onClick={() => navigate(`/repo/${repo._id}`)}
               >
 
 
@@ -140,8 +132,6 @@ function Dashboard() {
           </aside>
         </div>
 
-
-        {/* Footer */}
         <footer className="footer">
           <div>© 2025 GitHub, Inc.</div>
           <ul className="footer-links">

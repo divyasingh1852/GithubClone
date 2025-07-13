@@ -23,7 +23,7 @@ const Profile = () => {
           const response = await axios.get(
             `${import.meta.env.VITE_API_BASE_URL}/userProfile/${userId}`
           );
-          setUserDetails(response.data);           //here is axios -> no need to write response.json
+          setUserDetails(response.data);           
         } catch (err) {
           console.error("Cannot fetch user details: ", err);
         }
@@ -83,7 +83,6 @@ const Profile = () => {
 
       <div className="profile-page-wrapper">
         <div className="user-profile-section">
-          {/* <div className="profile-image"><img src={profileImg} alt="Profile" /></div> */}
          <img src={profileImg} alt="Profile" className="profile-image"/>
           <div className="name">
             <h3>{userDetails.username}</h3>
