@@ -95,7 +95,6 @@ function Dashboard() {
                 onClick={() => navigate(`/repo/${repo._id}`)}
               >
                 <h4>{repo.name}</h4>
-                <h5>{repo.description}</h5>
               </div>
               );
             })}
