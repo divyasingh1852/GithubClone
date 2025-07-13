@@ -28,7 +28,12 @@ function Dashboard() {
     const fetchSuggestedRepositories = async () => {
       try {
         setLoading(true); 
-        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/repo/all`);
+        // const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/repo/all`);
+         const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/repo/all`, {
+           headers: {
+             userid: localStorage.getItem("userId"),
+           },
+        });
         const data = await response.json();
         setSuggestedRepositories(data);
       } catch (err) {
@@ -41,6 +46,7 @@ function Dashboard() {
     fetchRepositories();
     fetchSuggestedRepositories();
   }, []);
+
 
   useEffect(() => {
     if (searchQuery === "") {
