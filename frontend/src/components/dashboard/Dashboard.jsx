@@ -46,7 +46,7 @@ function Dashboard() {
     if (searchQuery === "") {
       setSearchResults([]);
     } else {
-      const filtered = repositories.filter((repo) =>
+      const filtered = suggestedRepositories.filter((repo) =>
         repo.name.toLowerCase().includes(searchQuery.trim().toLowerCase()) 
       );
       setSearchResults(filtered);
