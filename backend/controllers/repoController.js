@@ -66,9 +66,13 @@ async function fetchRepositoryById  (req, res)  {
             return res.status(404).json({message: "Repository not found!"});
         }
 
-         // ✅ Restrict access if repo is private and user is not the owner
-    if (!repository.visibility && repository.owner._id.toString() !== requestUserId) {
-      return res.status(403).json({ message: "You are not authorized to view this repository." });
+        // ✅ Allow owner to access their private repo
+    const isOwner = repository.owner._id.toString() === requestUserId;
+
+    if (!repository.visibility && !isOwner) {
+      return res.status(403).json({
+        message: "You are not authorized to view this repository.",
+      });
     }
 
 
