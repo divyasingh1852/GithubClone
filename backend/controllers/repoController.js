@@ -38,18 +38,39 @@ async function createRepository (req, res)  {
 
 
 
-async function getAllRepositories (req, res)  {
-    try {
-        const repositories = await Repository.find({visibility: true})
-        .populate("owner")        //populate - to fetch all owner details not only id.if populate not written there this will only give owner id
-        .populate("issues");
+// async function getAllRepositories (req, res)  {
+//     try {
+//         const repositories = await Repository.find({visibility: true})
+//         .populate("owner")        //populate - to fetch all owner details not only id.if populate not written there this will only give owner id
+//         .populate("issues");
 
-        res.json(repositories);
-    } catch(err) {
-        console.error("Error during fetching repositories : ", err.message);
-        res.status(500).json("Server error!");
-    }
-};
+//         res.json(repositories);
+//     } catch(err) {
+//         console.error("Error during fetching repositories : ", err.message);
+//         res.status(500).json("Server error!");
+//     }
+// };
+
+
+async function getAllRepositories(req, res) {
+  const requestUserId = req.headers.userid;
+
+  try {
+    const repositories = await Repository.find({
+      $or: [
+        { visibility: true },
+        { owner: requestUserId }
+      ]
+    })
+    .populate("owner")
+    .populate("issues");
+
+    res.json(repositories);
+  } catch (err) {
+    console.error("Error during fetching repositories : ", err.message);
+    res.status(500).json("Server error!");
+  }
+}
 
 
 
