@@ -40,7 +40,7 @@ async function createRepository (req, res)  {
 
 async function getAllRepositories (req, res)  {
     try {
-        const repositories = await Repository.find({})
+        const repositories = await Repository.find({visibility: true})
         .populate("owner")        //populate - to fetch all owner details not only id.if populate not written there this will only give owner id
         .populate("issues");
 
@@ -55,6 +55,8 @@ async function getAllRepositories (req, res)  {
 
 async function fetchRepositoryById  (req, res)  {
     const  { id } = req.params;
+    const requestUserId = req.headers.userid; // ✅ user ID sent from frontend
+
     try {
         const repository = await Repository.findById(id)
         .populate("owner")        //populate - to fetch all owner details not only id.if populate not written there this will only give owner id
@@ -63,6 +65,12 @@ async function fetchRepositoryById  (req, res)  {
          if (!repository) {
             return res.status(404).json({message: "Repository not found!"});
         }
+
+         // ✅ Restrict access if repo is private and user is not the owner
+    if (!repository.visibility && repository.owner._id.toString() !== requestUserId) {
+      return res.status(403).json({ message: "You are not authorized to view this repository." });
+    }
+
 
         res.json(repository);
     } catch (err) {
