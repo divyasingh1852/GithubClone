@@ -8,14 +8,11 @@ function Dashboard() {
   const [searchQuery, setSearchQuery] = useState("");
   const [suggestedRepositories, setSuggestedRepositories] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
+  const [loading, setLoading] = useState(true); 
 
-
-  const navigate = useNavigate(); 
-
+  const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(" BASE URL:", import.meta.env.VITE_API_BASE_URL); 
-
     const userId = localStorage.getItem("userId");
 
     const fetchRepositories = async () => {
@@ -30,12 +27,14 @@ function Dashboard() {
 
     const fetchSuggestedRepositories = async () => {
       try {
-        console.log("Base URL:", process.env.REACT_APP_API_BASE_URL);
+        setLoading(true); 
         const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/repo/all`);
         const data = await response.json();
         setSuggestedRepositories(data);
       } catch (err) {
         console.error("Error while fetching suggested repos: ", err);
+      } finally {
+        setLoading(false); 
       }
     };
 
@@ -48,7 +47,7 @@ function Dashboard() {
       setSearchResults([]);
     } else {
       const filtered = repositories.filter((repo) =>
-        repo.name.toLowerCase().startsWith(searchQuery.toLowerCase())
+        repo.name.toLowerCase().startsWith(searchQuery.trim().toLowerCase()) 
       );
       setSearchResults(filtered);
     }
@@ -61,20 +60,20 @@ function Dashboard() {
         <div className="columns">
           <aside className="left">
             <h3>Top Repositories</h3>
-           {suggestedRepositories.map((repo)=>{
-          return (
-            <div
-                key={repo._id}
-                style={{ cursor: "pointer" }} 
-                onClick={() => navigate(`/repo/${repo._id}`)} 
-              >
-
-
-               <h4>{repo.name}</h4>
-               <h5>{repo.description}</h5>
-            </div>
-           );
-        })}
+            {loading ? (
+              <div>Loading Top Repositories...</div> 
+            ) : (
+              suggestedRepositories.map((repo) => (
+                <div
+                  key={repo._id}
+                  style={{ cursor: "pointer" }}
+                  onClick={() => navigate(`/repo/${repo._id}`)}
+                >
+                  <h4>{repo.name}</h4>
+                  <h5>{repo.description}</h5>
+                </div>
+              ))
+            )}
           </aside>
 
           <main className="center">
@@ -87,44 +86,38 @@ function Dashboard() {
               className="search-input"
             />
 
-           {searchResults.map((repo)=>{
-            return (
-
-             <div
+            {searchResults.map((repo) => (
+              <div
                 key={repo._id}
                 style={{ cursor: "pointer" }}
                 onClick={() => navigate(`/repo/${repo._id}`)}
               >
+                <h4>{repo.name}</h4>
+                <h5>{repo.description}</h5>
+              </div>
+            ))}
 
-
-               <h4>{repo.name}</h4>
-               <h4>{repo.description}</h4>
-            </div>
-           );
-          })}
-
-          <h3>Trending repositories · <a href="#">See more</a></h3>
-           <ul className="trending-list">
-            <li>
-              <strong>@bytedance</strong>/trae-agent
-                 <div className="lang">Python • 2.7k</div>
-             </li>
-             <li>
-                <strong>@coleam00</strong>/context-engineering-intro
-                 <div className="lang">2.1k</div>
-             </li>
+            <h3>Trending repositories · <a href="#">See more</a></h3>
+            <ul className="trending-list">
               <li>
-                  <strong>@kishanrajput23</strong>/Love-Babbar-Web-Development-Course
-                  <div className="lang">HTML • 59</div>
+                <strong>@bytedance</strong>/trae-agent
+                <div className="lang">Python • 2.7k</div>
               </li>
-           </ul>
-           </main>
+              <li>
+                <strong>@coleam00</strong>/context-engineering-intro
+                <div className="lang">2.1k</div>
+              </li>
+              <li>
+                <strong>@kishanrajput23</strong>/Love-Babbar-Web-Development-Course
+                <div className="lang">HTML • 59</div>
+              </li>
+            </ul>
+          </main>
 
-
-         <aside className="right">
+          <aside className="right">
             <h3>Latest Changes</h3>
             <ul className="events-list">
-               <li>CodeQL 2.22.1 bring Rust <br/> support to public preview</li>
+              <li>CodeQL 2.22.1 bring Rust support to public preview</li>
               <li>Agents page for GitHub Copilot coding agent</li>
               <li>Enterprise enabled policy for GitHub Models updated</li>
               <li>Copilot coding agent now has its own web browser</li>
