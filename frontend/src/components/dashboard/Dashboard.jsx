@@ -47,7 +47,7 @@ function Dashboard() {
       setSearchResults([]);
     } else {
       const filtered = repositories.filter((repo) =>
-        repo.name.toLowerCase().startsWith(searchQuery.trim().toLowerCase()) 
+        repo.name.toLowerCase().includes(searchQuery.trim().toLowerCase()) 
       );
       setSearchResults(filtered);
     }
