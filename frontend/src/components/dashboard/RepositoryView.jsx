@@ -14,9 +14,10 @@ const RepositoryView = () => {
     // 🔄 COMBINED FETCH: First get repo info...
     fetch(`${import.meta.env.VITE_API_BASE_URL}/repo/${id}`)
       .then((res) => res.json())
-      .then((data) => {
-        const info = data[0];
+      .then((info) => {
         setRepoInfo(info); // ✅ SET repoInfo before fetching files
+
+        console.log(" Repo Info Fetched:", info);
 
         if (!info?.name) return; // ✅ ADDED: Safety check to prevent null access
 

@@ -14,6 +14,8 @@ function Dashboard() {
 
 
   useEffect(() => {
+    console.log("🌐 BASE URL:", import.meta.env.VITE_API_BASE_URL); // ✅ ADD HERE
+
     const userId = localStorage.getItem("userId");
 
     const fetchRepositories = async () => {
