@@ -37,21 +37,6 @@ async function createRepository (req, res)  {
 };
 
 
-
-// async function getAllRepositories (req, res)  {
-//     try {
-//         const repositories = await Repository.find({visibility: true})
-//         .populate("owner")        //populate - to fetch all owner details not only id.if populate not written there this will only give owner id
-//         .populate("issues");
-
-//         res.json(repositories);
-//     } catch(err) {
-//         console.error("Error during fetching repositories : ", err.message);
-//         res.status(500).json("Server error!");
-//     }
-// };
-
-
 async function getAllRepositories(req, res) {
   const requestUserId = req.headers.userid;
 
@@ -76,7 +61,7 @@ async function getAllRepositories(req, res) {
 
 async function fetchRepositoryById  (req, res)  {
     const  { id } = req.params;
-    const requestUserId = req.headers.userid; // ✅ user ID sent from frontend
+    const requestUserId = req.headers.userid; //  user ID sent from frontend
 
     try {
         const repository = await Repository.findById(id)
@@ -87,7 +72,7 @@ async function fetchRepositoryById  (req, res)  {
             return res.status(404).json({message: "Repository not found!"});
         }
 
-        // ✅ Allow owner to access their private repo
+        // Allow owner to access their private repo
     const isOwner = repository.owner._id.toString() === requestUserId;
 
     if (!repository.visibility && !isOwner) {
